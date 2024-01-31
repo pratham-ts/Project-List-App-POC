@@ -15,15 +15,15 @@ const ProjectListLayout = ({
     <>
       <div className="flex justify-between items-center px-4 py-2 shadow-md mb-3 sticky top-0 z-50 bg-white">
         <div className="flex items-center">
-          <a href="https://stg.castit.biz/dashboard.asp">
+          <a href={`${process.env.NEXT_PUBLIC_LEGACY_APP_URL}dashboard.asp`}>
             <img
               className="h-12"
-              src="https://stg.castit.biz/images/castit-main-logo.gif"
+              src="https://castit.biz/images/castit-main-logo.gif"
               alt="Logo"
             />
           </a>
           <a
-            href="https://stg.castit.biz/dashboard.asp"
+            href={`${process.env.NEXT_PUBLIC_LEGACY_APP_URL}dashboard.asp`}
             className="ml-4 font-semibold text-black underline"
           >
             Project List
@@ -33,13 +33,13 @@ const ProjectListLayout = ({
         <div className="flex items-center gap-3">
           <ul className="flex gap-3">
             <li title="Inbox">
-              <a href="../inbox.asp" className="">
+              <a href={`${process.env.NEXT_PUBLIC_LEGACY_APP_URL}inbox.asp`}>
                 <CiMail size="1.9rem" className="ml-auto mr-auto my-2" />
                 Inbox
               </a>
             </li>
             <li title="Help">
-              <a href="#">
+              <a href="">
                 <IoIosHelpCircleOutline
                   size="1.9rem"
                   className="ml-auto mr-auto my-2"
@@ -67,23 +67,41 @@ const ProjectListLayout = ({
             </button>
             <div className="absolute  bottom-48 group-hover:-bottom-[11.3rem] transition-all ease-in-out duration-500">
               <div className="z-0 w-max whitespace-normal break-words rounded-lg border border-blue-gray-50 bg-white text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
-                <h3 className="font-sans font-normal text-sm py-2 px-5 hover:cursor-pointer  hover:bg-slate-300">
-                  Admin
-                </h3>
-                <h3 className="font-sans font-normal text-sm py-2 px-5 hover:cursor-pointer  hover:bg-slate-300">
-                  Message
-                </h3>
-                <h3 className="font-sans font-normal text-sm py-2 px-5 hover:cursor-pointer  hover:bg-slate-300">
-                  Talent
-                </h3>
-                <h3 className="font-sans font-normal text-sm py-2 px-5 hover:cursor-pointer  hover:bg-slate-300">
-                  Account
-                </h3>
+                <a href={`${process.env.NEXT_PUBLIC_LEGACY_APP_URL}admin.asp`}>
+                  <h3 className="font-sans font-normal text-sm py-2 px-5 hover:cursor-pointer  hover:bg-slate-300">
+                    Admin
+                  </h3>
+                </a>
+                <a
+                  href={`${process.env.NEXT_PUBLIC_LEGACY_APP_URL}messages/messages_main_jq.asp`}
+                >
+                  <h3 className="font-sans font-normal text-sm py-2 px-5 hover:cursor-pointer  hover:bg-slate-300">
+                    Message
+                  </h3>
+                </a>
+
+                <a
+                  href={`${process.env.NEXT_PUBLIC_LEGACY_APP_URL}advsearch.asp`}
+                >
+                  <h3 className="font-sans font-normal text-sm py-2 px-5 hover:cursor-pointer  hover:bg-slate-300">
+                    Talent
+                  </h3>
+                </a>
+                <a
+                  href={`${process.env.NEXT_PUBLIC_LEGACY_APP_URL}account.asp`}
+                >
+                  <h3 className="font-sans font-normal text-sm py-2 px-5 hover:cursor-pointer  hover:bg-slate-300">
+                    Account
+                  </h3>
+                </a>
+
                 <h3
                   className="font-sans font-normal text-sm py-2 px-5 hover:cursor-pointer  hover:bg-slate-300"
                   onClick={() => {
                     Cookies.remove("token");
-                    router.replace(`${process.env.NEXT_PUBLIC_BASE_URL_2!}`);
+                    router.replace(
+                      `${process.env.NEXT_PUBLIC_LEGACY_APP_URL}login.asp`
+                    );
                   }}
                 >
                   Log out

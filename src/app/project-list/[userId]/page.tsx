@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 const ProjectList = () => {
   const [projectList, setProjectList] = useState<Array<any>>([]);
@@ -10,10 +10,12 @@ const ProjectList = () => {
   const [itemsPerPage] = useState(10);
   const params = useParams();
 
+  const router = useRouter();
+
   const getProjects = async () => {
     const allProjects = (
       await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}project/${params.userId}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}project/${params.userId}`
       )
     ).data;
     setProjectList(allProjects);
@@ -65,15 +67,6 @@ const ProjectList = () => {
             />
           </div>
         </div>
-        {/* <button
-          className="btn overflow-hidden relative w-40 bg-blue-500 text-white py-4 px-2 rounded-xl font-bold uppercase -- before:block before:absolute before:h-full before:w-full before:bg-red-300 before:left-0 before:top-0 before:-translate-y-full hover:before:translate-y-0 before:transition-transform"
-          onClick={() => {
-            Cookies.remove("token");
-            router.replace(`${process.env.NEXT_PUBLIC_BASE_URL_2!}`);
-          }}
-        >
-          <span className="relative">Logout</span>
-        </button> */}
       </div>
       <div>
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -97,7 +90,15 @@ const ProjectList = () => {
               </thead>
               <tbody>
                 {currentItems.map((project) => (
-                  <tr key={project.ProjectId}>
+                  <tr
+                    key={project.ProjectId}
+                    className="hover:cursor-pointer hover:border-2"
+                    onClick={() =>
+                      router.replace(
+                        `https://stg.castit.biz/projectdetail_jq.asp?&p=${project.ProjectUID}`
+                      )
+                    }
+                  >
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 w-10 h-10">
